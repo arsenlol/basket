@@ -13,12 +13,13 @@
 .b-icon {float:left;}
 .b-icon img {width:100px; height:100px;}
 .b-text {padding-left:110px; line-height:100px;}
-.b-name {font-size:24px;display:block;float:left;}
-.b-price {font-size:24px;display:block;float:right;}
-.arrows{float:left;margin-top:20px; margin-left:10px;}
+.b-name {font-size:21px;display:block;float:left; position:relative; width:165px;}
+.b-price {font-size:20px;display:block;float:right; width:90px;}
+.arrows{float:right;margin-top:20px; margin-left:10px;}
 .arrows span {background-image:url(img/arrows.png); display:block; width:30px; height:30px; cursor:pointer;}
 .arrows .more {background-position:55px -6px; background-size:80px 70px;}
 .arrows .less {background-position:55px -35px; background-size:80px 70px;}
 .remove {float:right; margin-left:15px; width:40px; height:40px; margin-top:30px; cursor:pointer; background:url(img/close.png) 0 0/cover;}
+.quantity {position: absolute; right: 0px; top: 40px;}
 .quantity:before {content:url(img/quan.png); width:30px; height:30px; margin:0 5px;}
 .quantity input {width:37px;}

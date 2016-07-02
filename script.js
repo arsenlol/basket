@@ -5,20 +5,15 @@ more,
 less,
 remove;
 
+$(document).ready(buildBasket);
+
 $('.item').click(function(){
 	addToBasket($(this));
+	buildBasket();
 });
 
-function resetCookies(){
-	Cookies.set('basket', JSON.stringify(arr));        // перезаписать содержимое корзины
-}
-
-function addToBasket(item){
-	var iconPath = item.find('.icon img').attr('src'),
-	i_name = item.find('.i-name').text(),
-	price = parseFloat(item.find('.i-price strong').text());
-	var addItem = new Item(i_name,iconPath,price);
-	add(arr,i_name,iconPath,price);
+function resetCookies(){												// перезаписать содержимое корзины
+	Cookies.set('basket', JSON.stringify(arr));
 }
 
 function Item(itName,itIcon,itPrice) {
@@ -26,8 +21,38 @@ function Item(itName,itIcon,itPrice) {
 	return newItem;
 }
 
+function addToBasket(item){												// Добавить обьект элемента в массив корзины
+	var iconPath = item.find('.icon img').attr('src'), 			// изображение
+	i_name = item.find('.i-name').text(),						// имя
+	price = parseFloat(item.find('.i-price strong').text());	// цена
+	var addItem = new Item(i_name,iconPath,price);
+	add(arr,i_name,iconPath,price);
+}
+
+function buildBasket(){
+	var html = '';
+	for (var i = 0 ; i < arr.length; i++){
+		 html += '<div class="b-item">'+
+						'<div class="b-icon"><img src="'+ arr[i].icon +'" alt=""></div>'+
+						'<div class="b-text">'+
+							'<div class="b-name">' + arr[i].name +
+								'<strong class="quantity">'+
+									'<input type="number" value="' + arr[i].quantity + '">'+
+								'</strong></div>'+
+							'<div class="remove"></div>'+
+							'<div class="b-price"><strong>' + arr[i].price + '</strong> EUR</div>'+
+							'<div class="arrows">'+
+								'<span class="more"></span>'+
+								'<span class="less"></span>'+
+							'</div>'+
+						'</div>'+
+					'</div>';
+	}
+	$('#basket').empty().append(html);
+}
+
 function add(array,addName,addIcon,addPrice) {                          // добавить единицу эелемента
-	var itemExists = false;                            // (или создать)
+	var itemExists = false;                            					// (или создать)
 	for (var i = 0 ; i < array.length ; i++){
 	    if(array[i].name === addName){
 	    	array[i].quantity += 1;
@@ -41,26 +66,6 @@ function add(array,addName,addIcon,addPrice) {                          // до�
 	}
 	resetCookies();
 	return array;
-}
-
-function biudBasket(){
-	for (var i = 0 ; i < arr.length ; i++){
-		var html = '<div class="b-item">'+
-						'<div class="b-icon"><img src="'+ IMG +'" alt=""></div>'+
-						'<div class="b-text">'+
-							'<div class="b-name">' + NAME +
-								'<strong class="quantity">'+
-									'<input type="number" value="' + QUANTITY + '">'+
-								'</strong></div>'+
-							'<div class="arrows">'+
-								'<span class="more"></span>'+
-								'<span class="less"></span>'+
-							'</div>'+
-							'<div class="remove"></div>'+
-							'<div class="b-price"><strong>' + PRICE + '</strong> EUR</div>'+
-						'</div>'+
-					'</div>';
-	}
 }
 
 function del(array, delName){                          // удалить элемент
@@ -100,6 +105,7 @@ function less (array, lessName) {                     // убрать едини
 function setQuan (array, qName, quan) {              // установить значение каличества для элемента
 	for (var i = 0 ; i < array.length ; i++){
 		if(array[i].name === qName) {
+			quan = (quan) ? quan : array[i].quantity;
 			array[i].quantity = quan;
 		}
 	}
