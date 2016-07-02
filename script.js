@@ -49,6 +49,49 @@ function buildBasket(){
 					'</div>';
 	}
 	$('#basket').empty().append(html);
+	$('.quantity input').change(function(){
+		var name = $(this).parents('.b-name').text(),
+		quan = parseInt($(this).val());
+		setQuan(arr,name,quan);
+		if ($(this).val() < 1) {
+			del(arr,name);
+			buildBasket();
+		}
+	});
+	$('.more').click(function(){
+		var nameEl = $(this).parent().siblings('.b-name'),
+		nameText = nameEl.text();
+		more(arr,nameText);
+		var quan;
+		for (var i = 0; i < arr.length; i++) {
+			if(arr[i].name === nameText){
+				quan = arr[i].quantity;
+				console.log(name + ' ' + quan);
+			}
+		}
+		nameEl.find(".quantity input").val(quan);
+	});
+	$('.less').click(function(){
+		var nameEl = $(this).parent().siblings('.b-name'),
+		nameText = nameEl.text();
+		less(arr,nameText);
+		var quan;
+		for (var i = 0; i < arr.length; i++) {
+			if(arr[i].name === nameText){
+				quan = arr[i].quantity;
+			}
+		}
+		nameEl.find(".quantity input").val(quan);
+		if (nameEl.find(".quantity input").val() < 1) {
+			del(arr,nameText);
+			buildBasket();
+		}
+	});
+	$('.remove').click(function(){
+		var name = $(this).siblings('.b-name').text();
+		del(arr,name);
+		buildBasket();
+	})
 }
 
 function add(array,addName,addIcon,addPrice) {                          // добавить единицу эелемента
