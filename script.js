@@ -1,5 +1,5 @@
-var arr = (Cookies.get('basket') !== undefined) ? Cookies.getJSON('basket') : [], // воспроизвести содержимое корзины
-basket,
+var arr = (Cookies.get('basket') !== undefined) ? Cookies.getJSON('basket') : []; // воспроизвести содержимое корзины
+var basket,
 item = $('.item'),
 more,
 less,
@@ -15,19 +15,18 @@ function resetCookies(){
 
 function addToBasket(item){
 	var iconPath = item.find('.icon img').attr('src'),
-	name = item.find('.i-name').text(),
+	i_name = item.find('.i-name').text(),
 	price = parseFloat(item.find('.i-price strong').text());
-	var addItem = new Item(name, iconPath, price);
-	add(arr,name)
-	return arr;
+	var addItem = new Item(i_name,iconPath,price);
+	add(arr,i_name,iconPath,price);
 }
 
-function Item(itName, itIcon, itPrice) {
+function Item(itName,itIcon,itPrice) {
 	var newItem = {name:itName, quantity:1, icon:itIcon, price:itPrice};
 	return newItem;
 }
 
-function add(array,addName) {                          // добавить единицу эелемента
+function add(array,addName,addIcon,addPrice) {                          // добавить единицу эелемента
 	var itemExists = false;                            // (или создать)
 	for (var i = 0 ; i < array.length ; i++){
 	    if(array[i].name === addName){
@@ -37,7 +36,7 @@ function add(array,addName) {                          // добавить ед�
 	    } 
 	}
 	if (!itemExists) {
-		var item = new Item(addName);
+		var item = new Item(addName,addIcon,addPrice);
 		arr.push(item);
 	}
 	resetCookies();
