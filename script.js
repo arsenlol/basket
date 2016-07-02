@@ -29,6 +29,18 @@ function addToBasket(item){												// Добавить обьект элем
 	add(arr,i_name,iconPath,price);
 }
 
+function refreshSum(){
+	var quantity = 0;
+	var sum = 0;
+	for (var i = 0; i < arr.length; i++){
+		sum += (arr[i].price*arr[i].quantity);
+		quantity += arr[i].quantity;
+	}
+	$('.allquan').text('['+quantity+']');
+	sum = parseFloat(sum.toFixed(2));
+	$('.sum span').text(sum);
+}
+
 function buildBasket(){
 	var html = '';
 	for (var i = 0 ; i < arr.length; i++){
@@ -57,6 +69,7 @@ function buildBasket(){
 			del(arr,name);
 			buildBasket();
 		}
+		refreshSum();
 	});
 	$('.more').click(function(){
 		var nameEl = $(this).parent().siblings('.b-name'),
@@ -70,6 +83,7 @@ function buildBasket(){
 			}
 		}
 		nameEl.find(".quantity input").val(quan);
+		refreshSum();
 	});
 	$('.less').click(function(){
 		var nameEl = $(this).parent().siblings('.b-name'),
@@ -92,6 +106,7 @@ function buildBasket(){
 		del(arr,name);
 		buildBasket();
 	})
+	refreshSum();
 }
 
 function add(array,addName,addIcon,addPrice) {                          // добавить единицу эелемента
