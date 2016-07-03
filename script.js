@@ -100,6 +100,7 @@ function buildBasket(){
 			del(arr,nameText);
 			buildBasket();
 		}
+		refreshSum();
 	});
 	$('.remove').click(function(){
 		var name = $(this).siblings('.b-name').text();
