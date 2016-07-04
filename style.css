@@ -1,7 +1,7 @@
-.main {height:100%;}
+.main {height:100%; text-align:center;}
 .catalog, .basket {display:inline-block;border:1px solid black; padding:40px; margin:40px; box-sizing:border-box; vertical-align:top;}
-.basket {width:30%;height:auto;}
-.catalog {width:60%;}
+.basket {width:580px;height:auto;}
+.catalog {width:50%; text-align:center;}
 .item {display:inline-block; width:200px; text-align:center; margin:0px 9px; padding:20px; cursor:pointer;}
 .item:hover {background:#ccc;}
 .icon img {width:200px; height:200px;}
@@ -15,7 +15,7 @@
 .b-icon {float:left;}
 .b-icon img {width:100px; height:100px;}
 .b-text {padding-left:110px; line-height:100px;}
-.b-name {font-size:21px;display:block;float:left; position:relative; width:165px;}
+.b-name {font-size:21px;display:block;float:left; position:relative; width:165px; text-align:left;}
 .b-price {font-size:20px;display:block;float:right; width:90px;}
 .arrows{float:right;margin-top:20px; margin-left:10px;}
 .arrows span {background-image:url(img/arrows.png); display:block; width:30px; height:30px; cursor:pointer;}
